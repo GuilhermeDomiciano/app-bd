@@ -17,9 +17,20 @@ export default function Page(){
         Backend.usuarios.obter().then(setUsuarios)
     }, [])
 
-    function salvar(){
+    async function salvar(){
         if (!usuario) return 
-        Backend.usuarios.salvar(usuario)
+        await Backend.usuarios.salvar(usuario)
+        const usuarios = await Backend.usuarios.obter()
+        setUsuarios(usuarios)
+        setUsuario(null)
+    }
+
+    async function excluir(){
+        if (!usuario || !usuario.id) return 
+        await Backend.usuarios.excluir(usuario.id!)
+        const usuarios = await Backend.usuarios.obter()
+        setUsuarios(usuarios)
+        setUsuario(null)
     }
 
     return(
@@ -32,6 +43,7 @@ export default function Page(){
                 onChange={setUsuario}
                 salvar={salvar}
                 cancelar={() => setUsuario(null)}
+                excluir={excluir}
             />
             ):(
                 <>

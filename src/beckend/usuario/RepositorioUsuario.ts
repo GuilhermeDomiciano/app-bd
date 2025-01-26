@@ -22,4 +22,10 @@ export default class RepositorioUsuario{
         });
         return usuario as Usuario;
     }
+
+    static async excluir(id: string): Promise<void> {
+        await this.db.usuario.delete({
+            where: { id },
+        })
+    }
 }

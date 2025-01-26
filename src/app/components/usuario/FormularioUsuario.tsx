@@ -7,6 +7,7 @@ export interface FormularioUsuarioProps{
     onChange: (usuario: Partial<Usuario>) => void
     salvar: () => void
     cancelar: () => void
+    excluir: () => void
 }
 
 export default function FormularioUsuario(props: FormularioUsuarioProps){
@@ -36,9 +37,18 @@ export default function FormularioUsuario(props: FormularioUsuarioProps){
                     e => props.onChange?.({...props.usuario, senha: e.target.value})
                 }
             />
-            <div className="flex gap-5">
-                <button className="bg-blue-500 px-4 py-2 rounded-md" onClick={props.salvar}>Salvar</button>
-                <button className="bg-blue-500 px-4 py-2 rounded-md" onClick={props.cancelar}>Cancelar</button>
+            <div className="flex justify-between">
+                <div className="flex gap-5">
+                    <button className="bg-blue-500 px-4 py-2 rounded-md" onClick={props.salvar}>
+                        Salvar
+                    </button>
+                    <button className="bg-blue-500 px-4 py-2 rounded-md" onClick={props.cancelar}>
+                        Cancelar
+                    </button>
+                </div>
+                <button className="bg-red-500 px-4 py-2 rounded-md" onClick={props.excluir}>
+                    Excluir
+                </button>
             </div>
         </div>
     )
